@@ -15,5 +15,12 @@ module.exports = {
       "experimentalObjectRestSpread": true,
       "jsx": true,
     },
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": [
+        ["~components", "./src/components"]
+      ]
+    }
   }
 }
