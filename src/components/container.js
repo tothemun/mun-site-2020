@@ -1,5 +1,8 @@
 import React from 'react'
+import { Container } from 'react-grid-system'
 
 export default ({ children }) => (
-  <div style={{ maxWidth: 1180, margin: '0 auto' }}>{children}</div>
+  <Container>
+    {children}
+  </Container>
 )

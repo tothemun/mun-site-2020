@@ -10,9 +10,10 @@ body {
   font-family: "Avenir", Tahoma, Arial, Helvetica, sans-serif;
   font-size: 1em;
   line-height: 1.65;
-  color: #373F49;
+  color: #03262f;
   background: #eee;
   margin: 0;
+  background-color: #f7f0e9;
 }
 
 img {
@@ -54,7 +55,6 @@ a {
  */
 .section-headline {
   padding: 0 0 0.4em 0;
-  margin: 0 0 5vmin 0;
   border-bottom: 1px solid #ddd;
 }
 
