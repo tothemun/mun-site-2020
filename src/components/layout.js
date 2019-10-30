@@ -1,8 +1,10 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import Helmet from 'react-helmet'
+import { StaticQuery, graphql } from 'gatsby'
 import base from './base.css'
 import Container from './container'
 import Navigation from './navigation'
+import Footer from './footer/footer';
 
 class Template extends React.Component {
   render() {
@@ -15,11 +17,42 @@ class Template extends React.Component {
     }
 
     return (
-      <Container>
-        <Navigation />
-        {children}
-      </Container>
-    )
+      <StaticQuery
+        query={graphql`
+          query SiteMetadata {
+            allContentfulSite {
+              edges {
+                node {
+                  address {
+                    childMarkdownRemark {
+                      html
+                    }
+                  }
+                  copyright
+                  siteTitle
+                  logo {
+                    fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
+                      ...GatsbyContentfulFluid_tracedSVG
+                    }
+                  }
+                }
+              }
+            }
+          }
+        `}
+        render={({ allContentfulSite: { edges } }) => (
+          <Container>
+            <Helmet title={edges[0].node.siteTitle} />
+            <Navigation />
+            {children}
+            <Footer
+              address={edges[0].node.address}
+              copyright={edges[0].node.copyright}
+            />
+          </Container>
+        )}
+      />
+    );
   }
 }
 

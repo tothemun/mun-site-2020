@@ -8,13 +8,11 @@ import ArticlePreview from '~components/article-preview'
 
 class BlogIndex extends React.Component {
   render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
     const posts = get(this, 'props.data.allContentfulBlogPost.edges')
 
     return (
       <Layout location={this.props.location} >
         <div style={{ background: '#fff' }}>
-          <Helmet title={siteTitle} />
           <div className={styles.hero}>
             Blog
           </div>
@@ -40,11 +38,6 @@ export default BlogIndex
 
 export const pageQuery = graphql`
   query BlogIndexQuery {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     allContentfulBlogPost(sort: { fields: [publishDate], order: DESC }) {
       edges {
         node {
