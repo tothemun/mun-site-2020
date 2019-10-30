@@ -55,7 +55,7 @@ exports.createPages = ({ graphql, actions }) => {
 
     caseStudies.forEach((caseStudy, index) => {
       createPage({
-        path: `work/${caseStudy.node.slug}`,
+        path: `/work/${caseStudy.node.slug}`,
         component: caseStudyTemplate,
         context: {
           slug: caseStudy.node.slug
