@@ -9,7 +9,6 @@ import styles from './work.module.scss';
 const WorkIndex = (props) => {
   const siteTitle = get(props, 'data.site.siteMetadata.title');
   const caseStudies = get(props, 'data.allContentfulCaseStudy.edges');
-  console.log(props.data.allContentfulCaseStudy.edges, caseStudies);
 
   return (
     <Layout location={location}>
