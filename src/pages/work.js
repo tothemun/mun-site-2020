@@ -13,9 +13,6 @@ const WorkIndex = (props) => {
   return (
     <Layout location={location}>
       <Helmet title={siteTitle} />
-      <div className={styles.container}>
-        <div className={styles.child}>Hello</div>
-      </div>
       <div className="wrapper">
         <h2 className="section-headline">Recent articles</h2>
         <ul className="article-list">
