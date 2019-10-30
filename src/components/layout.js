@@ -31,7 +31,7 @@ class Template extends React.Component {
                   copyright
                   siteTitle
                   logo {
-                    fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
+                    fluid(maxWidth: 350, resizingBehavior: SCALE) {
                       ...GatsbyContentfulFluid_tracedSVG
                     }
                   }
@@ -48,6 +48,7 @@ class Template extends React.Component {
             <Footer
               address={edges[0].node.address}
               copyright={edges[0].node.copyright}
+              logo={edges[0].node.logo}
             />
           </Container>
         )}
