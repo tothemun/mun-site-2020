@@ -40,15 +40,15 @@ class Template extends React.Component {
             }
           }
         `}
-        render={({ allContentfulSite: { edges } }) => (
+        render={({ allContentfulSite: { edges: [ data ] } }) => (
           <Container>
-            <Helmet title={edges[0].node.siteTitle} />
-            <Navigation />
+            <Helmet title={data.node.siteTitle} />
+            <Navigation logo={data.node.logo} />
             {children}
             <Footer
-              address={edges[0].node.address}
-              copyright={edges[0].node.copyright}
-              logo={edges[0].node.logo}
+              address={data.node.address}
+              copyright={data.node.copyright}
+              logo={data.node.logo}
             />
           </Container>
         )}
