@@ -7,6 +7,7 @@ import Layout from '~components/layout'
 import ArticlePreview from '~components/article-preview'
 import ClientLogo from '~components/clientLogo/clientLogo'
 import WorkExample from '~components/workExample/workExample';
+import styles from './index.module.scss';
 
 class RootIndex extends React.Component {
   render() {
@@ -17,9 +18,9 @@ class RootIndex extends React.Component {
 
     console.log(workExamples)
     return (
-      <Layout location={this.props.location} >
+      <Layout className={styles.wrapper} location={this.props.location}>
           <Hero data={homepageData} />
-          <Row>
+          <Row className={styles.section}>
             <Col xs={12}>
             <h2 className="section-headline">{homepageData.workHeadline}</h2>
             </Col>
@@ -29,7 +30,7 @@ class RootIndex extends React.Component {
               )
             })}
           </Row>
-          <Row>
+          <Row className={styles.section}>
             <Col xs={12}>
             <h2 className="section-headline">{homepageData.clientListHeadline}</h2>
             </Col>
@@ -39,7 +40,7 @@ class RootIndex extends React.Component {
               )
             })}
           </Row>
-          <Row>
+          <Row className={styles.section}>
             <Col xs={12}>
               <h2 className="section-headline">{homepageData.blogHeadline}</h2>
             </Col>

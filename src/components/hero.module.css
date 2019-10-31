@@ -1,6 +1,6 @@
 .hero {
   position: relative;
-  background: #000;
+  background: #03262f;
   color: #fff;
   text-align: center;
   height: 800px;
@@ -17,7 +17,6 @@
 
 .heroDetails {
   position: absolute;
-  background: rgba(0, 0, 0, 0.7);
   left: 50%;
   bottom: 0;
   transform: translate(-50%, 0);

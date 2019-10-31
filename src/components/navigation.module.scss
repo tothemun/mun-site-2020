@@ -22,7 +22,7 @@
 }
 
 .navigationItem a {
-  color: currentColor;
+  color: #03262f;
   position: relative;
   text-decoration: none;
   transition: 250ms all ease-in-out;
@@ -61,7 +61,7 @@
     transition: 250ms all ease-in-out;
 
     &:hover {
-      background-color: #3b3b3b;
+      background-color: #03262f;
       color: #fff;
     }
   }
