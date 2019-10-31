@@ -21,6 +21,11 @@ body {
   margin: 0;
   background-color: #f7f0e9;
   min-height: 100%;
+  cursor: none;
+}
+
+a {
+  cursor: none;
 }
 
 img {

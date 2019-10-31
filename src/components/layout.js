@@ -5,6 +5,7 @@ import base from './base.css'
 import Container from '~components/container'
 import Navigation from './navigation'
 import Footer from './footer/footer';
+import Cursor from './cursor/cursor';
 
 class Template extends React.Component {
   render() {
@@ -56,6 +57,7 @@ class Template extends React.Component {
                 copyright={data.node.copyright}
                 logo={data.node.logoKnockout}
               />
+              <Cursor />
           </div>
         )}
       />

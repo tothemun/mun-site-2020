@@ -39,7 +39,8 @@ module.exports = {
         alias: {
           "~components": path.resolve(__dirname, 'src/components'),
           "~pages": path.resolve(__dirname, 'src/pages'),
-          "~templates": path.resolve(__dirname, 'src/templates')
+          "~templates": path.resolve(__dirname, 'src/templates'),
+          "~utils": path.resolve(__dirname, 'src/utils')
         },
         extensions: []
       }
