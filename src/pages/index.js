@@ -6,17 +6,31 @@ import Hero from '~components/hero'
 import Layout from '~components/layout'
 import ArticlePreview from '~components/article-preview'
 import ClientLogo from '~components/clientLogo/clientLogo'
+import WorkExample from '~components/workExample/workExample';
+import styles from './index.module.scss';
 
 class RootIndex extends React.Component {
   render() {
     const posts = get(this, 'props.data.allContentfulBlogPost.edges');
     const homepageData = get(this, 'props.data.allContentfulHomepage.edges')[0].node;
     const clientList = get(homepageData, 'clientList');
-    console.log(clientList)
+    const workExamples = get(homepageData, 'workExamples');
+
+    console.log(workExamples)
     return (
-      <Layout location={this.props.location} >
+      <Layout className={styles.wrapper} location={this.props.location}>
           <Hero data={homepageData} />
-          <Row>
+          <Row className={styles.section}>
+            <Col xs={12}>
+            <h2 className="section-headline">{homepageData.workHeadline}</h2>
+            </Col>
+            {workExamples.map(({ heroImage, slug, title }) => {
+              return (
+                <WorkExample heroImage={heroImage} title={title} slug={slug} />
+              )
+            })}
+          </Row>
+          <Row className={styles.section}>
             <Col xs={12}>
             <h2 className="section-headline">{homepageData.clientListHeadline}</h2>
             </Col>
@@ -26,7 +40,7 @@ class RootIndex extends React.Component {
               )
             })}
           </Row>
-          <Row>
+          <Row className={styles.section}>
             <Col xs={12}>
               <h2 className="section-headline">{homepageData.blogHeadline}</h2>
             </Col>
@@ -86,6 +100,16 @@ export const pageQuery = graphql`
               title
             }
             url
+          }
+          workHeadline
+          workExamples {
+            heroImage {
+              fluid {
+                ...GatsbyContentfulFluid_tracedSVG
+              }
+            }
+            slug
+            title
           }
         }
       }

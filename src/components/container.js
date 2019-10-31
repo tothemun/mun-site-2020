@@ -1,8 +1,7 @@
 import React from 'react'
-import { Container } from 'react-grid-system'
 
 export default ({ children }) => (
-  <Container>
+  <div style={{ padding: '0 8rem' }}>
     {children}
-  </Container>
+  </div>
 )

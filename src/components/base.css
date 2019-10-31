@@ -6,6 +6,11 @@
   font-display: swap;
 }
 
+html, body { 
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: "Avenir", Tahoma, Arial, Helvetica, sans-serif;
   font-size: 1em;
@@ -14,6 +19,12 @@ body {
   background: #eee;
   margin: 0;
   background-color: #f7f0e9;
+  min-height: 100%;
+  cursor: none;
+}
+
+a {
+  cursor: none;
 }
 
 img {
