@@ -1,7 +1,6 @@
 import cn from 'classnames';
 import React, { Component, createRef } from 'react';
 import * as paper from 'paper';
-import * as SimplexNoise from 'simplex-noise';
 import { lerp, map } from '~utils';
 import styles from './cursor.module.scss';
 
@@ -15,9 +14,7 @@ class Cursor extends Component {
   stuckX = 0;
   stuckY = 0;
   isStuck = false;
-  isNoisy = false;
   polygon = null;
-  bigCoordinates = [];
 
   componentDidMount() {
     const { segments, radius, strokeColor, strokeWidth } = this.props;
@@ -25,7 +22,6 @@ class Cursor extends Component {
 
     paper.setup(this.$canvas.current);
 
-    // the base shape for the noisy circle
     const polygon = new paper.Path.RegularPolygon(
       new paper.Point(0, 0),
       segments,
@@ -36,7 +32,6 @@ class Cursor extends Component {
     polygon.smooth();
     const group = new paper.Group([polygon]);
     group.applyMatrix = false;
-    this.noiseObjects = polygon.segments.map(() => new SimplexNoise());
 
     this.polygon = polygon;
     this.group = group;
@@ -68,7 +63,6 @@ class Cursor extends Component {
   };
 
   initHovers = () => {
-    // find all anchor tags
     const allAnchorTags = document.getElementsByTagName('a');
 
     for (let item of allAnchorTags) {
@@ -81,7 +75,7 @@ class Cursor extends Component {
     if (!this.$canvas.current) return;
 
     const { isStuck } = this;
-    const { shapeBounds, speed, noiseScale, noiseRange } = this.props;
+    const { shapeBounds, speed } = this.props;
 
     if (!isStuck) {
       this.lastX = lerp(this.lastX, this.clientX, speed);
@@ -98,46 +92,7 @@ class Cursor extends Component {
       this.polygon.scale(1.08);
     } else if (!isStuck && polyBoundWidth > 30) {
       this.polygon.scale(0.92);
-
-      if (this.isNoisy) {
-        this.polygon.segments.forEach((segment, i) => {
-          segment.point.set(this.bigCoordinates[i][0], this.bigCoordinates[i][1]);
-        });
-        this.isNoisy = false;
-        this.bigCoordinates = [];
-      }
     } 
-    
-    // while stuck and big, apply the noise
-    if (isStuck && polyBoundWidth > shapeBounds.width) {
-      this.isNoisy = true;
-
-      // get coordinates of large circle
-      if (this.bigCoordinates.length === 0) {
-        this.polygon.segments.forEach(({ point: { x, y } }, i) => {
-          this.bigCoordinates[i] = [x, y];
-        });
-      }
-
-      // loop over all points of the polygon
-      this.polygon.segments.forEach((segment, i) => {
-        // get new noise value
-        // we divide event.count by noiseScale to get a very smooth value
-        const noiseX = this.noiseObjects[i].noise2D(event.count / noiseScale, 0);
-        const noiseY = this.noiseObjects[i].noise2D(event.count / noiseScale, 1);
-        
-        // map the noise value to our defined range
-        const distortionX = map(noiseX, -1, 1, -noiseRange, noiseRange);
-        const distortionY = map(noiseY, -1, 1, -noiseRange, noiseRange);
-        
-        // apply distortion to coordinates
-        const newX = this.bigCoordinates[i][0] + distortionX;
-        const newY = this.bigCoordinates[i][1] + distortionY;
-        
-        // set new (noisy) coodrindate of point
-        segment.point.set(newX, newY);
-      })
-    }
   }
 
   update = () => {
@@ -160,8 +115,6 @@ class Cursor extends Component {
 }
 
 Cursor.defaultProps = {
-  noiseScale: 150,
-  noiseRange: 4,
   segments: 8,
   radius: 15,
   speed: .15,
