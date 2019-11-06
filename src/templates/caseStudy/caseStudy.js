@@ -1,18 +1,35 @@
 import React from 'react';
+import { Col, Row } from 'react-grid-system';
 import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import Helmet from 'react-helmet';
 import get from 'lodash/get';
+import RichText from '~components/richText/richText';
 import Layout from '~components/layout';
+import heroStyles from '~components/hero.module.css'
 
 const CaseStudyTemplate = (props) => {
   const post = get(props, 'data.contentfulCaseStudy');
   const siteTitle = get(props, 'data.site.siteMetadata.title');
-
+  console.log(post)
   return (
     <Layout location={props.location}>
-      <div>
-        <Helmet title={`${post.title} | ${siteTitle}`} />
-      </div>
+      <Helmet title={`${post.title} | ${siteTitle}`} />
+      <Row>
+        <Col xs={12}>
+          <Img 
+            className={heroStyles.heroImage} 
+            alt={post.title} 
+            fluid={post.heroImage.fluid} 
+          />
+          <h2>{post.title}</h2>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12}>
+          <RichText data={post.body} />
+        </Col>
+      </Row>
     </Layout>
   )
 };
