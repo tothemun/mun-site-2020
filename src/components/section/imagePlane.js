@@ -90,6 +90,7 @@ class ImagePlane extends Component {
   }
 
   render() {
+
     return (
       <mesh visible position={[0, 0, 0]} ref={this.$mesh} rotation={[0, 0, 0]}>
         <planeGeometry 
