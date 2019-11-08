@@ -27,6 +27,7 @@ module.exports = {
     'gatsby-transformer-remark',
     'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
+    `gatsby-plugin-glslify`,
     'gatsby-plugin-sharp',
     'gatsby-plugin-sass',
     {
@@ -38,6 +39,7 @@ module.exports = {
       options: {
         alias: {
           "~components": path.resolve(__dirname, 'src/components'),
+          "~shaders": path.resolve(__dirname, 'src/shaders'),
           "~pages": path.resolve(__dirname, 'src/pages'),
           "~templates": path.resolve(__dirname, 'src/templates')
         },
