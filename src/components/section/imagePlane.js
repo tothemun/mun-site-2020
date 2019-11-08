@@ -90,8 +90,6 @@ class ImagePlane extends Component {
   }
 
   render() {
-    const { images } = this.props;
-
     return (
       <mesh visible position={[0, 0, 0]} ref={this.$mesh} rotation={[0, 0, 0]}>
         <planeGeometry 
@@ -108,7 +106,7 @@ class ImagePlane extends Component {
             time: { type: "f", value: 0 },
             progress: { type: "f", value: 1 },
             border: { type: "f", value: 0 },
-            intensity: { type: "f", value: 0 },
+            intensity: { type: "f", value: 0.3 },
             scaleX: { type: "f", value: 40 },
             scaleY: { type: "f", value: 40 },
             transition: { type: "f", value: 40 },
@@ -117,7 +115,7 @@ class ImagePlane extends Component {
             radius: { type: "f", value: 0 },
             texture1: { type: "f", value: this.textures[0] },
             texture2: { type: "f", value: this.textures[1] },
-            displacement: { type: "f", value: new THREE.TextureLoader().load(images) },
+            displacement: { type: "f", value: new THREE.TextureLoader().load(disp) },
             resolution: { type: "v4", value: new THREE.Vector4() },
           }}
           fragmentShader={frag}
@@ -132,7 +130,7 @@ ImagePlane.defaultProps = {
   duration: 1,
   ease: Power2['easeInOut'],
   uniforms: {
-    intensity: {value: 0.3, type:'f', min:0.0 , max:2 }
+    intensity: {value: 0.3, type: 'f', min: 0.0 , max: 2 }
   }
 };
 
