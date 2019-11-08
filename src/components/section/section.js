@@ -5,21 +5,25 @@ import ImagePlane from './imagePlane';
 
 class Section extends React.Component {
   render() {
-    const { sections } = this.props;
+    const { cameraPosition, sections } = this.props;
     const height = window.innerHeight;
     const width = window.innerWidth;
 
     const aspect = width / height;
+
+    const dist  = cameraPosition.z;
+    const sectionHeight = 1;
+    const fov = 2 * (180 / Math.PI) * Math.atan(sectionHeight / (2 * dist));
 
     return (
       <div style={{ height: '100vh' }}>
         <Canvas
           camera={{
             aspect,
-            fov: 70,
+            fov,
             near: 0.001,
             far: 1000,
-            position: [0, 0, 2]
+            position: cameraPosition
           }}
         >
           <ImagePlane
@@ -35,6 +39,7 @@ class Section extends React.Component {
 }
 
 Section.defaultProps = {
+  cameraPosition: new THREE.Vector3(0, 0, 2),
   sections: [
     {
       title: 'Heineken F1 AR',
