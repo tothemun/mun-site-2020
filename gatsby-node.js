@@ -15,7 +15,7 @@ exports.createPages = ({ graphql, actions }) => {
         }
       }
     }
-  `).then(results => {
+  `).then(result => {
     if (result.errors) {
       console.log("Error retrieving contentful data", result.errors);
     }

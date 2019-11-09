@@ -4,7 +4,7 @@ import * as dat from 'dat.gui';
 import { TimelineMax, Power2 } from 'gsap';
 import frag from '~shaders/planeShift/frag.glsl';
 import vert from '~shaders/planeShift/vert.glsl';
-import disp from '~shaders/planeShift/disp1.jpg';
+import disp from '~shaders/planeShift/disp4.jpg';
 
 class ImagePlane extends Component {
   textures = [];
@@ -15,6 +15,7 @@ class ImagePlane extends Component {
   isRunning = false;
   current = 0;
   gui = null;
+  state = { currentImage: 0 };
 
   componentDidMount() {
     const { images } = this.props;
@@ -32,7 +33,6 @@ class ImagePlane extends Component {
 
       uniforms.texture1.value = this.textures[0];
       uniforms.texture2.value = this.textures[1];
-
       this.resize();
 
       window.addEventListener("resize", this.resize);
@@ -57,6 +57,8 @@ class ImagePlane extends Component {
     const material = this.$material.current;
     const mesh = this.$mesh.current;
 
+    if (!material) return;
+
     material.uniforms.resolution.value.x = width;
     material.uniforms.resolution.value.y = height;
     material.uniforms.resolution.value.z = a1;
@@ -66,7 +68,15 @@ class ImagePlane extends Component {
     mesh.scale.y = 1;
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentImage !== this.props.currentImage) {
+      this.next();
+    }
+  }
+
   next = () => {
+    console.log(this.$material.current.uniforms.texture1.value)
+
     if (this.isRunning) return;
 
     const { duration, ease } = this.props;

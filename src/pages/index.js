@@ -1,37 +1,52 @@
 import React from 'react'
+import { Col, Row } from 'react-grid-system'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
-import Helmet from 'react-helmet'
 import Hero from '~components/hero'
 import Layout from '~components/layout'
 import ArticlePreview from '~components/article-preview'
 import Section from '~components/section/section'
+import ClientLogo from '~components/clientLogo/clientLogo'
+import WorkExample from '~components/workExample/workExample';
+import styles from './index.module.scss';
 
 class RootIndex extends React.Component {
   render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-    const posts = get(this, 'props.data.allContentfulBlogPost.edges')
-    const [author] = get(this, 'props.data.allContentfulPerson.edges')
+    const posts = get(this, 'props.data.allContentfulBlogPost.edges');
+    const homepageData = get(this, 'props.data.allContentfulHomepage.edges')[0].node;
+    const clientList = get(homepageData, 'clientList');
+    const workExamples = get(homepageData, 'workExamples');
 
+    console.log(workExamples)
     return (
-      <Layout location={this.props.location} >
-        <div style={{ background: '#fff' }}>
-          <Helmet title={siteTitle} />
-          <Hero data={author.node} />
-          <div className="wrapper">
-            <Section />
-            <h2 className="section-headline">Recent articles</h2>
-            <ul className="article-list">
-              {posts.map(({ node }) => {
-                return (
-                  <li key={node.slug}>
-                    <ArticlePreview article={node} />
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        </div>
+      <Layout className={styles.wrapper} location={this.props.location}>
+          <Section sections={workExamples} />
+          <Row className={styles.section}>
+            <Col xs={12}>
+            <h2 className="section-headline">{homepageData.clientListHeadline}</h2>
+            </Col>
+            {clientList.map(({ logo, name, url }) => {
+              return (
+                <ClientLogo logo={logo} />
+              )
+            })}
+          </Row>
+          <Row className={styles.section}>
+            <Col xs={12}>
+              <h2 className="section-headline">{homepageData.blogHeadline}</h2>
+            </Col>
+            <Col xs={12}>
+              <ul className="article-list">
+                {posts.map(({ node }) => {
+                  return (
+                    <li key={node.slug}>
+                      <ArticlePreview article={node} />
+                    </li>
+                  )
+                })}
+              </ul>
+            </Col>
+          </Row>
       </Layout>
     )
   }
@@ -41,11 +56,6 @@ export default RootIndex
 
 export const pageQuery = graphql`
   query HomeQuery {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     allContentfulBlogPost(sort: { fields: [publishDate], order: DESC }) {
       edges {
         node {
@@ -66,23 +76,36 @@ export const pageQuery = graphql`
         }
       }
     }
-    allContentfulPerson(filter: { contentful_id: { eq: "15jwOBqpxqSAOy2eOO4S0m" } }) {
+    allContentfulHomepage(filter: { contentful_id: { eq: "tnsA2pSaEZF33cRFuTApC" } }) {
       edges {
         node {
-          name
-          shortBio {
-            shortBio
-          }
-          title
-          heroImage: image {
-            fluid(
-              maxWidth: 1180
-              maxHeight: 480
-              resizingBehavior: PAD
-              background: "rgb:000000"
-            ) {
-              ...GatsbyContentfulFluid_tracedSVG
+          headerCopy
+          clientListHeadline
+          blogHeadline
+          clientList {
+            name
+            logo{
+              fluid {
+                ...GatsbyContentfulFluid_tracedSVG
+              }
+              title
             }
+            url
+          }
+          workHeadline
+          workExamples {
+            heroImage {
+              fluid {
+                ...GatsbyContentfulFluid_tracedSVG
+              }
+            }
+            description {
+              childMarkdownRemark {
+                html
+              }
+            }
+            slug
+            title
           }
         }
       }

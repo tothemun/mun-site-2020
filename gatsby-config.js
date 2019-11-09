@@ -41,7 +41,8 @@ module.exports = {
           "~components": path.resolve(__dirname, 'src/components'),
           "~shaders": path.resolve(__dirname, 'src/shaders'),
           "~pages": path.resolve(__dirname, 'src/pages'),
-          "~templates": path.resolve(__dirname, 'src/templates')
+          "~templates": path.resolve(__dirname, 'src/templates'),
+          "~utils": path.resolve(__dirname, 'src/utils')
         },
         extensions: []
       }
