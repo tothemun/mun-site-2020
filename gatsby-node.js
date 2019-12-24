@@ -1,11 +1,9 @@
-const Promise = require('bluebird')
-const path = require('path')
+const path = require("path");
 
 exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions
-
-  const blogPosts = graphql(`
-    {
+  const { createPage } = actions;
+  return graphql(`
+    query {
       allContentfulBlogPost {
         edges {
           node {
@@ -14,30 +12,6 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
-    }
-  `).then(results => {
-    if (result.errors) {
-      console.log("Error retrieving contentful data", result.errors);
-    }
-
-    const blogPostTemplate = path.resolve('./src/templates/blog-post.js');
-    const posts = result.data.allContentfulBlogPost.edges;
-
-    posts.forEach((post, index) => {
-      createPage({
-        path: `/blog/${post.node.slug}/`,
-        component: blogPostTemplate,
-        context: {
-          slug: post.node.slug
-        },
-      })
-    });
-  }).catch(error => {
-    console.log(error);
-  });
-
-  const caseStudies = graphql(`
-    {
       allContentfulCaseStudy {
         edges {
           node {
@@ -47,24 +21,29 @@ exports.createPages = ({ graphql, actions }) => {
         }
       }
     }
-  `).then(result => {
-    console.log("Error retrieving contentful data", result.errors);
+  `).then(res => {
+    if (res.errors) {
+      throw res.errors;
+    }
 
-    const caseStudyTemplate = path.resolve('./src/templates/caseStudy/caseStudy.js');
-    const caseStudies = result.data.allContentfulCaseStudy.edges;
-
-    caseStudies.forEach((caseStudy, index) => {
+    res.data.allContentfulBlogPost.edges.forEach(({ node }) => {
       createPage({
-        path: `/work/${caseStudy.node.slug}`,
-        component: caseStudyTemplate,
+        path: `/blog/${node.slug}`,
+        component: path.resolve("src/templates/blog-post.js"),
         context: {
-          slug: caseStudy.node.slug
+          slug: node.slug
         }
-      })
+      });
     });
-  }).catch(error => {
-    console.log(error);
-  });
 
-  return Promise.all([blogPosts, caseStudies]);
+    res.data.allContentfulCaseStudy.edges.forEach(({ node }) => {
+      createPage({
+        path: `/work/${node.slug}`,
+        component: path.resolve("src/templates/caseStudy/caseStudy.js"),
+        context: {
+          slug: node.slug
+        }
+      });
+    })
+  })
 };

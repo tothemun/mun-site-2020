@@ -1,42 +1,45 @@
 {
-  "name": "gatsby-contentful-starter",
-  "description": "Starter Contentful Gatsby Blog",
+  "name": "mun-site-2020",
+  "description": "MUN Studio Site for 2020",
   "version": "1.0.0",
-  "author": "Stefan Judis <stefanjudis@gmail.com>",
+  "author": "Jonathan Blair <jon@tothemun.com>",
   "bugs": {
-    "url": "https://github.com/contentful-userland/gatsby-contentful-starter/issues"
+    "url": "https://github.com/tothemun/mun-site-2020/issues"
   },
   "dependencies": {
-    "gatsby-image": "^2.0.38",
-    "gatsby-plugin-alias-imports": "^1.0.5",
-    "gatsby-plugin-react-helmet": "^3.0.12",
-    "gatsby-plugin-sass": "^2.1.20",
-    "gatsby-plugin-sharp": "^2.0.34",
-    "gatsby-source-contentful": "^2.0.48",
-    "gatsby-transformer-remark": "^2.3.8",
-    "gatsby-transformer-sharp": "^2.1.18",
-    "lodash": "^4.17.11",
-    "node-sass": "^4.13.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-helmet": "^5.2.0",
-    "sharp": "^0.22.0"
+    "@contentful/rich-text-react-renderer": "13.4.0",
+    "@types/react": "16.9.16",
+    "dotenv": "8.2.0",
+    "dotenv-expand": "5.1.0",
+    "framer-motion": "1.6.17",
+    "gatsby": "2.18.4",
+    "gatsby-image": "2.2.34",
+    "gatsby-plugin-alias-imports": "1.0.5",
+    "gatsby-plugin-force-trailing-slashes": "1.0.4",
+    "gatsby-plugin-manifest": "2.2.30",
+    "gatsby-plugin-offline": "3.0.24",
+    "gatsby-plugin-react-helmet": "3.1.16",
+    "gatsby-plugin-react-svg": "2.1.2",
+    "gatsby-plugin-sharp": "2.3.4",
+    "gatsby-source-contentful": "2.1.66",
+    "gatsby-source-filesystem": "2.1.39",
+    "gatsby-transformer-sharp": "2.3.6",
+    "gsap": "3.0.2",
+    "lodash": "4.17.15",
+    "prop-types": "15.7.2",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "react-helmet": "5.2.1",
+    "react-transition-group": "^4.3.0",
+    "styled-components": "4.4.1",
+    "typescript": "3.7.3"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "chalk": "^2.4.2",
-    "contentful-import": "^7.4.3",
-    "dotenv": "^8.0.0",
-    "eslint": "^5.16.0",
-    "eslint-plugin-react": "^7.12.4",
-    "gatsby": "^2.3.22",
-    "gh-pages": "^2.0.1",
-    "inquirer": "^6.2.2",
-    "prettier": "^1.17.0",
-    "rimraf": "^2.6.3",
-    "yargs-parser": "^13.0.0"
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1"
   },
-  "homepage": "https://github.com/contentful-userland/gatsby-contentful-starter#readme",
+  "homepage": "https://tothemun.com",
   "keywords": [
     "gatsby",
     "contentful"
@@ -45,7 +48,7 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/contentful-userland/gatsby-contentful-starter.git"
+    "url": "git+https://github.com/tothemun/mun-site-2020"
   },
   "scripts": {
     "dev": "npm run develop",

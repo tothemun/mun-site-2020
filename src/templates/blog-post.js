@@ -29,7 +29,7 @@ class BlogPostTemplate extends React.Component {
             </p>
             <div
               dangerouslySetInnerHTML={{
-                __html: post.body.childMarkdownRemark.html,
+                __html: post.body,
               }}
             />
           </div>
@@ -57,9 +57,7 @@ export const pageQuery = graphql`
         }
       }
       body {
-        childMarkdownRemark {
-          html
-        }
+        body
       }
     }
   }
