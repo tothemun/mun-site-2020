@@ -19,7 +19,11 @@ module.exports = {
   "settings": {
     "import/resolver": {
       "alias": [
-        ["~components", "./src/components"]
+        ["~", "./src"],
+        ["~components", "./src/components"],
+        ["~pages", "./src/pages"],
+        ["~images", "./src/images"],
+        ["~templates", "./src/templates"]
       ]
     }
   }
