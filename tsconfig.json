@@ -16,7 +16,8 @@
       "~components/*": ["src/components/*"],
       "~images/*": ["src/images/*"],
       "~templates/*": ["src/templates/*"],
-      "~pages/*": ["src/pages/*"]
+      "~pages/*": ["src/pages/*"],
+      "~hooks/*": ["src/hooks/*"]
     }
   },
   "exclude": ["node_modules", "public", ".cache"]

@@ -23,7 +23,8 @@ module.exports = {
         ["~components", "./src/components"],
         ["~pages", "./src/pages"],
         ["~images", "./src/images"],
-        ["~templates", "./src/templates"]
+        ["~templates", "./src/templates"],
+        ["~hooks", "./src/hooks"]
       ]
     }
   }

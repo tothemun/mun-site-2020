@@ -14,7 +14,8 @@ module.exports = {
           "~images": `${__dirname}/src/images`,
           "~layouts": `${__dirname}/src/layouts`,
           "~pages": `${__dirname}/src/pages`,
-          "~templates": `${__dirname}/src/templates`
+          "~templates": `${__dirname}/src/templates`,
+          "~hooks": `${__dirname}/src/hooks`
         }
       }
     },
